@@ -1,0 +1,47 @@
+/*
+CSC33200   Task 2
+ 
+Shirong Zheng      
+
+02/23/2018
+
+*/
+
+
+ShirongdeMBP:~ shirongzheng$ cd Desktop/task2_Zheng/Part2
+ShirongdeMBP:Part2 shirongzheng$ ./Part2
+Process P - Value of a: 10, Value of b: 30, value of pid: 33275
+Process Q - Value of a: 35, Value of b: 25, Value of pid: 33276
+Process Q - Value of a: 35, Value of b: 45, Value of pid: 33276
+Process R - Value of a: 905, Value of b: 25, Value of pid: 33277
+ShirongdeMBP:Part2 shirongzheng$ ./Part2
+Process P - Value of a: 10, Value of b: 30, value of pid: 33278
+Process Q - Value of a: 35, Value of b: 25, Value of pid: 33279
+Process Q - Value of a: 35, Value of b: 45, Value of pid: 33279
+Process R - Value of a: 905, Value of b: 25, Value of pid: 33280
+ShirongdeMBP:Part2 shirongzheng$ ./Part2
+Process P - Value of a: 10, Value of b: 30, value of pid: 33281
+Process Q - Value of a: 35, Value of b: 25, Value of pid: 33282
+Process Q - Value of a: 35, Value of b: 45, Value of pid: 33282
+Process R - Value of a: 905, Value of b: 25, Value of pid: 33283
+ShirongdeMBP:Part2 shirongzheng$ ./Part2
+Process P - Value of a: 10, Value of b: 30, value of pid: 33285
+Process Q - Value of a: 35, Value of b: 25, Value of pid: 33286
+Process Q - Value of a: 35, Value of b: 45, Value of pid: 33286
+Process R - Value of a: 905, Value of b: 25, Value of pid: 33287
+
+There are three process which I call them parent, child_one, child_two. In each process, 
+they all have their own a, b. After first fork(), if fq==0 is child_one, else is parent. In parent, there is second fork(). If fq!=0 is parent, else is child_two. The order for this three precess is random. But each process get their a and b, so the output 
+for a and b will not change in each process.
+
+Line 1 is the output of the first child process which has changed value of 'a'  by plus value of 'b'. it prints out a: 10, b: 30 and from the value of a,b we can say that, it is process ‘P’. For process P, ( fq != 0 ) and the code inside ‘else’ is executed. So, ‘b = a + b -5’ gives us ‘b = 30’ and ‘a’ remains the same as before. So the process id printed here will be id of process ‘P’.
+
+Line 2 is the output of the failure of creating second child process which bases on the value of first child to add value 'b' with 20 and it is still first child process.it prints out a: 35, b: 25 and it is process ‘Q’. As the parent process is finished executing, the child process ‘Q’ starts executing( fq = = 0 ). Before beginning of this process, the values of a , b are the same as they were in the parent process ‘P’. The change of values in process ‘P’ after fork() being done will not effect the values Process Q will use while executing. So, a =10, b= 25 remains as the initial values for process ‘Q’. ‘a= a+b’ gives us a = 35 and b remains unchanged ( b = 25 ).
+
+Line 3 is the output of the second child process which base on the parent process to do multiplication for value 'a'.it prints out a : 35, b: 45 and it is process ‘Q’. But it is the result which we get after the second fork() is being done which gives birth to process ‘R’. The parent process ‘Q’ enters the if statement as (fr != 0) for process ‘Q’. So, from before we had a = 35, b = 25 and here b = b+ 20 gives us b = 45 and a = 35.
+
+Line 4 is the output of the parent process which doesn't create any child process yet and does the addition with initial value.it prints out a: 905, b: 25 and the process is ‘R’. The child process of ‘Q’ is ‘R’ which runs the code written under else ( fr = = 0 ). So, in parent process ‘Q’ we had a: 35, b: 25 which are the initial values for process ‘R’; So a = (a*b)+30 gives us 905 and b remains 25.
+
+Each pid after several times process, it will increase by 1. 
+
+
